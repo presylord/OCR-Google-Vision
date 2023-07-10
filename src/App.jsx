@@ -94,9 +94,9 @@ const App = () => {
 
               </div>
             ) : (
-              <div className="text-center mx-auto d-flex align-items-center">
+              <div className="text-center mx-auto d-flex align-items-center w-100">
                 <div
-                  className="dropzone p-3"
+                  className="dropzone p-3 w-100"
                   onDrop={onDrop}
                   onDragOver={(e) => e.preventDefault()}
                 >
