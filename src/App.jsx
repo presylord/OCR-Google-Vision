@@ -76,56 +76,63 @@ const App = () => {
     setLoading(null)
   }
 
-  const copyTextToClipboard = () => {
-    navigator.clipboard.writeText(text);
-  };
-
   return (
-<div className="container mt-5">
-      <div className="row">
-        <div className="col-lg-6">
-          <div className="card shadow">
-            <div className="card-body text-center">
-              {imageFile ? (
-                <div>
-                  <img src={URL.createObjectURL(imageFile)} alt="Selected file" className="img-fluid mb-3 rounded" />
-                  <button className="btn btn-primary m-1" onClick={detectText} disabled={text ? true : false}>Detect Text</button>
-                  <button className="btn btn-secondary m-1" onClick={reset}>Reset</button>
+    <div className="container  mx-auto w-100 ">
+      <div className="row  ">
+        <div className="col-12 col-xl-4 card rounded-5">
+
+          <div className="m-4 border border-1 rounded-5 dragContainer d-flex ">
+            {imageFile ? (
+              <div className="d-flex flex-column mx-auto ">
+                <div className="mt-3 image_preview p-3">
+                  <img src={URL.createObjectURL(imageFile)} alt="Selected file" className="mb-3" />
                 </div>
-              ) : (
+                <div className="mt-auto py-5">
+                  <button className="btn btn-primary mx-1" onClick={detectText} disabled={text ? true : false}>Detect Text</button>
+                  <button className="btn btn-secondary mx-1" onClick={reset}>Reset</button>
+                </div>
+
+              </div>
+            ) : (
+              <div className="text-center mx-auto d-flex align-items-center w-100">
                 <div
-                  className="dropzone text-center p-5"
+                  className="dropzone p-3 w-100"
                   onDrop={onDrop}
                   onDragOver={(e) => e.preventDefault()}
                 >
-                  <img src={photo} alt="photo" className="img-fluid mb-3 rounded" />
-                  <h3>Drag your photo here to start uploading</h3>
+                  <img src={photo} alt="photo" />
+                  <h3 className="mb-3">Drag your photo here to start uploading</h3>
                   <hr className="hr-text" data-content="OR" />
                   <input type="file" onChange={onSelectFile} accept="image/*" aria-label="Upload" />
                 </div>
-              )}
-            </div>
+              </div>
+            )}
+
           </div>
         </div>
-        <div className="col-lg-6">
-          <div className="card shadow">
-            <div className="card-body">
-              <div className="text-center">
-                <div className="pt-4">
-                  <h4>Extracted Text:</h4>
-                  <hr className="hr-text" />
-                  {loading === 1 && <Loading />}
-                  {!loading && text && (
-                    <div className="p-3">
-                      <p className="text-muted">{text}</p>
-                      <button className="btn btn-secondary" onClick={copyTextToClipboard}>Copy Text</button>
-                    </div>
-                  )}
-                </div>
+        <div className="col-12 col-xl-8 card rounded-5 ">
+
+          <div className="m-4 border border-1 rounded-5 dragContainer ">
+
+            <div className="text-center h-100">
+              <div
+                className="dropzone pt-4"
+
+              >
+                <h4 className="mb-3">Extracted Text:</h4>
+                <hr className="hr-text" />
+                {loading == 1 && <Loading />}
+                {!loading && text && (
+                  <div className="p-2 text-extracted">
+                    <p className="text-start">{text}</p>
+                  </div>
+                )}
               </div>
             </div>
+
           </div>
         </div>
+
       </div>
     </div>
   );
